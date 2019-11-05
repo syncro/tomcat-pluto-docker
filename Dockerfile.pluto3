@@ -13,14 +13,14 @@ USER root
 
 
 # Get and Unpack Tomcat
-#RUN curl https://github.com/apache/portals-pluto/archive/pluto-3.1.0.tar.gz -o /tmp/pluto.tar.gz \
-# && tar xzf /tmp/pluto.tar.gz -C /opt \
-## && ln -s /opt/pluto-${PLUTO_VERSION} /opt/tomcat \
-## && chown -R jboss /opt/tomcat /opt/apache-tomcat-${TOMCAT_VERSION} \
-# && rm /tmp/catalina.tar.gz
+#RUN curl -L https://github.com/syncro/tomcat-pluto-docker/releases/download/pluto-${PLUTO_VERSION}/pluto-${PLUTO_VERSION}-#bundle.tar.bz2 -o /tmp/pluto.tar.bz2 \
+# && tar xjf /tmp/pluto.tar.bz2 -C /opt \
+# && ln -s /opt/pluto-${PLUTO_VERSION} /opt/tomcat \
+# && rm /tmp/pluto.tar.bz2
+ 
 
-ADD docker/pluto-3.1.1-SNAPSHOT-bundle.tar.bz2 /opt
-
+ADD docker/pluto-${PLUTO_VERSION}-bundle.tar.bz2 /opt 
+ 
 RUN ln -s /opt/pluto-${PLUTO_VERSION} /opt/tomcat 
  
 # Add roles

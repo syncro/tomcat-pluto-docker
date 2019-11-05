@@ -5,22 +5,25 @@ ENV TZ Europe/Moscow
 EXPOSE 8080
 
 
-ENV PLUTO_VERSION 3.1.1-SNAPSHOT
+ENV PLUTO_VERSION 2.1.0-M3
 ENV DEPLOY_DIR /deployments
 
 USER root
 
 
 
+
 # Get and Unpack Tomcat
-#RUN curl http://archive.apache.org/dist/tomcat/tomcat-8/v${TOMCAT_VERSION}/bin/apache-tomcat-${TOMCAT_VERSION}.tar.gz -o /tmp/catalina.tar.gz \
-# && tar xzf /tmp/catalina.tar.gz -C /opt \
-## && ln -s /opt/pluto-${PLUTO_VERSION} /opt/tomcat \
-## && chown -R jboss /opt/tomcat /opt/apache-tomcat-${TOMCAT_VERSION} \
-# && rm /tmp/catalina.tar.gz
+#RUN curl -L https://github.com/syncro/tomcat-pluto-docker/releases/download/pluto-${PLUTO_VERSION}/pluto-${PLUTO_VERSION}-bundle.tar.bz2 -o /tmp/pluto.tar.bz2 \
+# && tar xjf /tmp/pluto.tar.bz2 -C /opt \
+# && ln -s /opt/pluto-${PLUTO_VERSION} /opt/tomcat \
+# && chown -R jboss /opt/tomcat /opt/apache-tomcat-${TOMCAT_VERSION} \
+# && rm /tmp/pluto.tar.bz2
 
-ADD docker/pluto-3.1.1-SNAPSHOT-bundle.tar.bz2 /opt
 
+ADD docker/pluto-${PLUTO_VERSION}-bundle.tar.bz2 /opt
+
+ 
 RUN ln -s /opt/pluto-${PLUTO_VERSION} /opt/tomcat 
  
 # Add roles
@@ -52,3 +55,4 @@ ENV PATH $PATH:$CATALINA_HOME/bin
 CMD ["deploy-and-run.sh"]
 
 ##USER jboss
+
